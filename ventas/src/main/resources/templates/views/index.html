@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenido!!! </title>
+    <link href="../../static/css/style.css" th:href="@{/css/index.css}" rel="stylesheet" type="text/css"/>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body>
+    <link th:href="#{/views/header.html}" href="header.html" rel="import" />
+    <!--<div data-aos="fade-down-left">
+        <p th:text="'First'" />
+        <p th:text="${testBody}"></p>
+        <a th:href="'/ini/info'" th:text="'Info me!!!'" />
+    </div>-->
+    <link href="header.html" type="text/html"/>
+    <div id="wrapper">
+        <div id="tstB">
+            <h1>Bienvenido!!!....</h1>
+        </div>
+        <div id="infoAllProducts">
+            <h2>All  products</h2>
+        </div>
+        <div id="signin">
+            <h2>Sign In</h2>
+        </div>
+        <div id="signup">
+            <h2>Sign Up</h2>
+        </div>
+        <div id="carritoInfo">
+            <div id="carritoProducts"></div>
+        </div>
+        <div id="cProducts" onclick="carritoBuy()"></div>
+        <div id="wrapperProductinfo">
+            <div id="Productinfo"></div>
+        </div>
+        <div id="styleTop" class="image-container" data-scroll-reveal="enter rigth over 1s">
+            <div>
+                <!--<div id="infoProduct"></div>-->
+                <div id="allProductsTop" style="padding:40px;"></div>
+            </div>
+        </div>
+        <div id="styleLess" class="image-container" data-scroll-reveal="enter bottom over 1s">
+            <div>
+                <!--<div id="infoProductLess"></div>-->
+                <div id="allProductsLess" style="padding:40px;"></div>
+            </div>
+        </div>
+        <div id="infoMe">
+            <h2>Info me!!!...</h2>
+        </div>
+    </div>
+
+    <script src="../../static/js/index.js" th:src="@{/js/index.js}"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/4.0.9/scrollreveal.js" integrity="sha512-XJgPMFq31Ren4pKVQgeD+0JTDzn0IwS1802sc+QTZckE6rny7AN2HLReq6Yamwpd2hFe5nJJGZLvPStWFv5Kww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
+    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+    <script>
+        var ff= ScrollReveal().reveal('#styleTop', {
+            delay: 100,
+            duration: 2000,
+            origin: 'bottom',
+            distance: '10px',
+            //distance: '100px',
+            useDelay: 'onload',
+            reset: true
+        });
+        var f= ScrollReveal().reveal('#styleLess', {
+            delay: 100,
+            duration: 1000,
+            origin: 'bottom',
+            //distance: '200px',
+            distance: '5px',
+            useDelay: 'onload',
+            reset: true
+        })
+        var fff= ScrollReveal().reveal('#tstB',{
+            delay:  100,
+            duration: 3000,
+            origin: 'right',
+            distance: '-10px',
+            useDelay: 'onload',
+            reset: true
+        })
+
+        ScrollReveal().reveal('#infoMe',{
+            delay: 100,
+            duration: 3000,
+            origin: 'top',
+            distance: '-10px',
+            useDelay: 'onload',
+            reset: true
+        })
+        ScrollReveal().reveal('#infoAllProducts',{
+            delay: 100,
+            duration: 1000,
+            origin: 'top',
+            distance: '10px',
+            useDelay: 'onload',
+            reset: true
+        })
+        ScrollReveal().reveal('#signin',{
+            delay: 100,
+            duration: 1000,
+            origin: 'top',
+            distance: '10px',
+            useDelay: 'onload',
+            reset: true
+        })
+        ScrollReveal().reveal('#signup', {
+            delay: 100,
+            duration: 1000,
+            origin: 'bottom',
+            distance: '10px',
+            useDelay: 'onload',
+            reset: true
+        })
+    </script>
+    <script>
+        AOS.init();
+    </script>
+    <!--<script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyBttC3VucBkJsTxtc9pG9_JrClpWZtuYIs",
+            authDomain: "testjava-2bbc3.firebaseapp.com",
+            projectId: "testjava-2bbc3",
+            storageBucket: "testjava-2bbc3.appspot.com",
+            messagingSenderId: "491072032704",
+            appId: "1:491072032704:web:93ace9b27379d81e1cc225",
+            measurementId: "G-FXW99MZL7R"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>-->
+</body>
+</html>

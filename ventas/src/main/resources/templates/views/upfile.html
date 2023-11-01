@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>upfile</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}" />
+</head>
+<body>
+   <p th:text="'Up your image product'"></p>
+   <img id="imgtst"/>
+   <input type="text" id="textTst" value="'Bienvenido Sr. develpment'"/>
+   <input type="file" id="filetst" onchange="changeState(this)"/>
+   <input type="file" id="filetest" />
+   <button th:text="Subir" onclick="upFile()"></button>
+   <div>
+       <div id="rowBody"></div>
+   </div>
+<script>
+    //var swal= new swal()
+
+   /*Swal.fire({
+        title: 'testSwal',
+        type: 'successfully',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        html: 'this is test',
+        buttons: {
+            cancel: "Cancelar",
+            confirm: "Aceptar"
+        }
+    })*/
+
+
+    var xml= new XMLHttpRequest()
+    var htmlBody= ''
+
+    var fileTst= document.getElementById("filetst")
+    var fileTest= document.getElementById("filetest")
+    var txt= document.getElementById("textTst")
+    var img= document.getElementById("imgtst")
+    var content= document.getElementById("rowBody")
+
+    console.log("FILE: ")
+    console.log(fileTst)
+    console.log("TXT: ")
+    console.log(txt.value)
+
+
+    const upFile= () => {
+        if(confirm("realmente quieres subir este archivo?")){
+            console.log("si lo va a subir")
+        }
+        var file= fileTst.files[0]
+        var xml= new XMLHttpRequest();
+        xml.open("POST","http://localhost:8080/ini/upfile", true)
+        //xml.setRequestHeader("Content-Type","application/json")
+        //var xml= new XMLHttpRequest()
+        //xml.open("POST", "http://localhost:8080/ini/allProducts");
+        //xml.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+        xml.onreadystatechange= (e)=> {
+            console.log(e.target.response)
+            console.log(`Estado > ${xml.readyState}`)
+        }
+        xml.responseType= "json"
+        xml.onload= (e)=> {
+            var jsonBody= e.target.response
+            console.log(jsonBody)
+            /*jsonBody.map(e => {
+                console.log("****************")
+                var jsonB= JSON.parse(e)
+                var idProduct= jsonB.id
+                console.log(jsonB.id)
+                console.log(jsonB.name)
+                console.log(jsonB.photo)
+                var arrayBuffer= new Uint8Array(jsonB.photo);
+                var blob= new Blob([arrayBuffer], {type: 'application/pdf'})
+                //var blob= new Blob([arrayBuffer], {type: 'image/jpeg'})
+                var url= URL.createObjectURL(blob)
+                console.log(url)
+                htmlBody+= `<div class="column" onclick="idBody(${idProduct})">
+                            <h1>${jsonB.name}</h1>
+                            <img width="100px" height="100px" src="${url}"/>
+                           </div>`
+                console.log("****************")
+            })
+            content.innerHTML= htmlBody
+            */
+
+            /*
+            var objImg= e.target.response
+            console.log(objImg.photo)
+            var blob= new Blob([objImg.photo], {type: 'application/pdf'})
+            var url= URL.createObjectURL(blob)
+            var blobb= new Blob([new Uint8Array(objImg.photo)], {type: 'application/pdf'})
+            var urll= URL.createObjectURL(blobb)
+            console.log(url)
+            console.log(urll)
+            */
+
+            Swal.fire({
+                title: 'Successfully',
+                type: 'success',
+                html: 'up file successfully',
+                allowEscapeKey: false,
+                allowOutsideClick: false
+            })
+                .then(e => {
+                    console.log("El cliente acepto")
+                })
+                .catch(e => {
+                    console.log("Error mensaje upfile Swal")
+                    Swal.snoop
+                })
+        }
+        var formData= new FormData()
+        formData.append("file", file)
+        formData.append("data", JSON.stringify({name: "Manzana verde", description: "this is description from manzana verde. test", valor: 200.0}))
+
+        //xml.send(JSON.stringify({name: "Manzana verde", img: file, description: "this is description from manzana verde. test"}))
+        xml.send(formData)
+
+    }
+
+    function success(Title, successfully){
+        console.log(Title)
+        console.log(successfully)
+
+        console.log("successfully!!!....")
+    }
+
+    function idBody(id){
+        console.log("----------------------")
+        console.log(`Id product: ${id}`)
+        console.log("----------------------")
+        console.log(window)
+        window["success"](["Title","successfully"],true)
+    }
+
+    function upFunction(){
+        var filee= fileTst.files[0]
+        /*xml.open("POST","http://localhost:8080/ini/tstRecibir")
+        console.log("Button up file")
+        //var jsonString= JSON.parse('{"id":8,"name":"manzana roja"}')
+        var jsonString= "id=8&name='manzana verde'"
+        xml.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+        xml.send(jsonString)
+        xml.onreadystatechange= (e)=> {
+            console.log(e)
+        }
+        xml.readyState= (e) =>{
+            console.log("Successfully")
+        }
+        xml.onerror= (e)=> {
+            console.log(e)
+        }*/
+        /*
+        xml.open("POST", "http://localhost:8080/ini/testR")
+        xml.setRequestHeader("Content-Type","application/json")
+        var stringJson= JSON.parse('{"id":8,"name":"Manzana verde"}')
+        Jstring= JSON.stringify({"id":8,"name":"Manzana verde"})
+        console.log(Jstring)
+        xml.send(Jstring)
+        */
+        xml.open("POST", "http://localhost:8080/ini/upfile", true)
+        var stringJ= `file=${filee}`
+
+        var f= new FormData()
+        f.append("file",filee)
+
+        xml.onreadystatechange= (e)=> {
+            console.log("**********************")
+//            console.log(e.target.responseText)
+            console.log("state: " + xml.readyState)
+            //var urll= URL.createObjectURL(e)
+            //console.log(urll)
+            //fileTest.textContent= e.target.response
+            console.log("**********************")
+        }
+
+
+        //xml.responseType= "arraybuffer"
+
+        xml.responseType= "arraybuffer"
+
+        xml.onload= (e)=> {
+            console.log("********········**************")
+            //var jsonResponse= JSON.parse(e.target.responseText)
+            var jsonResponse= e
+            console.log(jsonResponse)
+
+            //JavaByteToURL.byteArrayToURL(e.target.responseText)
+
+//            console.log(e.target.responseText)
+            console.log(e.target.response)
+            console.log(e.target)
+            //var fileBlob= new Blob(e.target.responseText, {type: 'application/pdf'});
+
+            var biteArray= new Uint8Array(e.target.response)
+            console.log(biteArray)
+            //var blobBody= new Blob([biteArray], { type: 'image/jpeg' })
+            //var blobBody= new Blob([biteArray], {type: 'application/pdf'})
+            var blobBody= new Blob([biteArray], {type: 'application/pdf'})
+            var urlBody= URL.createObjectURL(blobBody)
+            console.log(urlBody)
+
+            fileTest.innerText= "this is new file"
+            fileTest.title= "title this is test"
+            fileTest.src= urlBody
+            fileTest.href= urlBody
+            img.src= urlBody
+
+            //var fileBlob= new Blob([e.target.responseText]);
+            //var fileBlob= new Blob([e.target.response], { type: 'application/pdf' });
+            var fileBlob= new Blob([e.target.response], {type: 'application/pdf'})
+            //var fileBlob= new Blob([e.target.response], { type: 'image/jpg' });
+            //sconsole.log(fileBlob)
+
+            var urll= URL.createObjectURL(fileBlob)
+            console.log(urll)
+
+            console.log("******** archivo ******")
+            console.log(xml.response)
+
+            console.log("******** archivo ******")
+
+            console.log("********········**************")
+        }
+        xml.onerror= (e)=> {
+            console.log("-----------------------")
+            console.log(e)
+            console.log("-----------------------")
+        }
+
+        xml.send(f)
+    }
+    function changeState(e){
+        console.log(e.files)
+        console.log("modificando photo")
+
+    }
+</script>
+</body>
+</html>
