@@ -20,6 +20,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
       AuthCredentials dataUser= new AuthCredentials();
       try{
          dataUser= new ObjectMapper().readValue(request.getReader(), AuthCredentials.class);
+         System.out.println(dataUser.getMail());
+         System.out.println(dataUser.getPassword());
       }catch(Exception e){
             System.out.println("Error leyendo datos de signup ");
             System.out.println(e);
@@ -32,6 +34,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication auth){
      try {
          AuthCredentials dataUser= (AuthCredentials) auth.getPrincipal();
+         System.out.println("Success: ");
+         System.out.println(dataUser.getMail());
+         System.out.println("___________ success -- ");
          String newToken= TokenUtils.crearToken(dataUser.getUserName(), dataUser.getMail());
          response.setHeader("Authorization", "Bearer " + newToken);
          response.getWriter().flush();

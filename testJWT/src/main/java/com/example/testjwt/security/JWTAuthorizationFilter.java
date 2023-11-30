@@ -26,9 +26,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
           UsernamePasswordAuthenticationToken usernamePAT= TokenUtils.getAuthentication(token);
           SecurityContextHolder.getContext().setAuthentication(usernamePAT);
       }
-        System.out.println("semi entrega role");
       filterChain.doFilter(request, response);
-        System.out.println("finalizo entrega role");
     }
 
 }

@@ -12,6 +12,7 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.gson.Gson;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,49 +34,39 @@ import java.nio.file.Paths;
 import java.util.*;
 
 
-
 @Controller
 @RequestMapping(value = "/ini")
 public class InicioController {
-
     @Autowired
     private clientRepository cliente;
-
     @Autowired
     private clientService clientS;
     @Autowired
     private productService product;
-
     private mails sendMail;
     private infoMails infoMail;
-
     public InicioController(){
         try{
             FileInputStream serviceAccount =
                     new FileInputStream("path/to/serviceAccountKey.json");
-
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .build();
-
             FirebaseApp.initializeApp(options);
         }catch(Exception e){
             System.out.println(e);
         }
-
     }
-
     @GetMapping(value = "/")
     public String bienvenido(HttpServletRequest req, HttpServletResponse res, Model model){
         model.addAttribute("testBody","Ropa exclusiva Mor!!!");
         return "views/index";
     }
-
     @GetMapping(value = "/file")
     public String file(HttpServletRequest req, HttpServletResponse res){
         System.out.print("Url: ");
         System.out.println(req.getRequestURL());
-        if (req.getCookies() != null){
+            if (req.getCookies() != null){
             System.out.print("Cookies: ");
             System.out.println(req.getCookies());
         }
@@ -184,7 +175,18 @@ public class InicioController {
             return null;
         }
     }
-
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response){
+        try{
+            String afterToken= request.getHeader("Authorization");
+            response.setHeader("Authorization", "null");
+            response.getWriter().flush();
+        }catch(Exception e){
+            System.out.println("Error logout");
+            e.fillInStackTrace();
+        }
+        return "views/index";
+    }
     @GetMapping(value = "/info")
     public ModelAndView info(){
         ModelAndView m= new ModelAndView("views/info");
@@ -267,6 +269,10 @@ public class InicioController {
         //clientService clientS= new clientService();
         //clientS.testService();
         return ResponseEntity.ok().body("successfully");
+    }
+    @GetMapping("/saveClient")
+    public ResponseEntity saveClient(){
+        return ResponseEntity.ok().body("Save successful");
     }
 }
 

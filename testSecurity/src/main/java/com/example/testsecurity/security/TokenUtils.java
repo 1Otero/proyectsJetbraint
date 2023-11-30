@@ -10,11 +10,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.*;
 
 public class TokenUtils {
-
     private final static String ACCESS_TOKEN_SECRECT= "4f1nhkfdkskaskfsdkfksal232kksfask";
     //private final static Long ACCESS_TOKEN_VALIDITY_SECOND= 2_592_000L;
     private final static Long ACCESS_TOKEN_VALIDITY_SECOND= 600L;
-
     public static String crearToken(String username, String mail){
         try{
             Long expirationTime= ACCESS_TOKEN_VALIDITY_SECOND * 2L;

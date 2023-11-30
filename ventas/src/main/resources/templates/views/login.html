@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Bienvenidoo!!!!</h1>
+    <form action="/login" method="POST">
+        <input type="hidden" name="X-MyHeader" value="Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0cnVqQGdtYWlsLmNvbSIsImV4cCI6MTcwMDU4NTIxNSwiZW1haWwiOiJ0cnVqQGdtYWlsLmNvbSIsIkF1dGhvcml0eXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQ0xJIn0seyJhdXRob3JpdHkiOiJST0xFX0FETUlOIn1dLCJ1c2VybmFtZSI6InRydWpAZ21haWwuY29tIn0.b9khBeZfL7np1TExKPPKdNFuAKXR2kpriMgWkKcXFUQ">
+        <input placeholder="Correo" name="email" value="truj@gmail.com"/>
+        <input placeholder="Password" name="pass" value="good"/>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+      <script>
+       fetch("http://localhost:8080/login", {
+           method: "POST",
+           headers: {"Content-Type": "application/json", "Accept":"*/*"},
+           body: JSON.stringify({"email":"truj@gmail.com", "pass": "good"})
+       })
+           .then(e => {
+               console.log(e.status)
+           })
+           .catch(e => console.log(e))
+       var xml= new XMLHttpRequest()
+       xml.open("POST", "http://localhost:8080/login")
+       xml.send(JSON.stringify({"email":"truj@gmail.com", "pass": "good"}))
+       xml.onload = (e)=> {
+           console.log(e)
+           console.log(xml.status)
+       }
+       xml.onreadystatechange = (e) => {
+           console.log(e)
+           console.log(xml.status)
+       }
+     </script>
+</html>

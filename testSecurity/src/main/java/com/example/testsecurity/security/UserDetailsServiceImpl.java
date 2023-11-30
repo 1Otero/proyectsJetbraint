@@ -4,6 +4,7 @@ import com.example.testsecurity.entitys.Role;
 import com.example.testsecurity.entitys.RoleUser;
 import com.example.testsecurity.entitys.User;
 import com.example.testsecurity.repositorys.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+   @Autowired
    private UserRepository user;
 
     @Override
@@ -25,6 +27,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user= this.user
                 .findOneByMail(mail)
                 .orElseThrow(() -> { return new UsernameNotFoundException("El usuario " + mail + " not found ");});
+        System.out.println("user:   ");
+        System.out.println(user.getUserName());
+        System.out.println("_______________ user --");
         return new UserDetailsImpl(user);
     }
 

@@ -39,10 +39,10 @@ public class InicioController {
     //@Secured({"IS_AUTHENTICATED_ANONYMOUSLY","ROLE_ANONYMOUS"})
     @GetMapping(name = "Rutainicio", value = "/")
     public String Saludo(){
-        return "Bienvenido sr User! ";
+        return "Welcome sr User! how are you?";
     }
 
-    @GetMapping(value = "/login")
+    @GetMapping(value = "/loginn")
     public String login(){
         System.out.println("Iniciando session!");
         String user= "roro";

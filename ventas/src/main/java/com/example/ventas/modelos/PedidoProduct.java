@@ -12,6 +12,7 @@ public class PedidoProduct {
     @Column(name= "id")
     private Long id;
 
+    //Este atributo quizas no es necesario, se debe usar client
     //@JsonProperty("pedido")
     @ManyToOne
     @JoinColumn(name= "id_pedido")
@@ -21,6 +22,9 @@ public class PedidoProduct {
     @ManyToOne
     @JoinColumn(name= "id_product")
     private Product product;
+
+    //Recodrdar que esta tabla va tener en cuenta al cliente y el producto que adquirio
+    //Aqui deberia venir el cliente
 
     public Pedido getPedido() {
         return pedido;

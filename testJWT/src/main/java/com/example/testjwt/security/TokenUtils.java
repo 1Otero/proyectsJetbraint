@@ -19,7 +19,7 @@ public class TokenUtils {
     private final static String ACCESS_TOKEN_SECRECT= "4qhkldfjsojfdsghsfljSalkjddsE3hWr";
     private final static Long ACCESS_TOKEN_VALIDITY_SECOND= 2_592_000L;
     public static String createToken(String name, String email){
-        SecretKey key= Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRECT.getBytes());
+        //SecretKey key= Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRECT.getBytes());
         Long expirationTime= ACCESS_TOKEN_VALIDITY_SECOND * 1_000;
         Date expirationDate= new Date(System.currentTimeMillis() + expirationTime);
         System.out.println(new Date(System.currentTimeMillis() + expirationTime));

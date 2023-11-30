@@ -1,9 +1,8 @@
-package com.example.ventas.modelos;
+package com.example.jwtspring.modelos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "clients")
@@ -24,18 +23,18 @@ public class Client {
     @JsonProperty("clave")
     @Column(name= "clave")
     private String pass;
-    @JsonProperty("pedidos")
+    //@JsonProperty("pedidos")
     //@Column(name= "listPedido")
-    @OneToMany(mappedBy= "client", cascade= CascadeType.PERSIST)
+    //@OneToMany(mappedBy= "client", cascade= CascadeType.PERSIST)
     //@OneToMany(mappedBy= "client", cascade= CascadeType.ALL, orphanRemoval= true)
-    private List<Pedido> listPedidos;
+    //private List<Pedido> listPedidos;
     @JsonProperty("body")
     private String body;
     @JsonProperty("subject")
     private String subject;
     //private List<String> listAuthoritys= new ArrayList<>();
-    @OneToMany(mappedBy = "id_client", cascade = CascadeType.PERSIST)
-    private List<ClientRole> listRolesClient;/**/
+    //@OneToMany(mappedBy = "id_client", cascade = CascadeType.PERSIST)
+    //private List<ClientRole> listRolesClient;/**/
     public String getName(){ return this.name;}
     public void setName(String name){ this.name= name;}
     public String getCorreo() {
@@ -44,8 +43,8 @@ public class Client {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    public List<Pedido> getListPedidos(){return this.listPedidos;}
-    public void setListPedidos(List<Pedido> listPedidos){this.listPedidos= listPedidos;}
+    //public List<Pedido> getListPedidos(){return this.listPedidos;}
+    //public void setListPedidos(List<Pedido> listPedidos){this.listPedidos= listPedidos;}
     public String getBody() {
         return body;
     }
@@ -61,13 +60,13 @@ public class Client {
     public String getPass() { return pass; }
     public void setPass(String pass) { this.pass = pass; }
 
-    public List<ClientRole> getListRolesClient() {
+    /*public List<ClientRole> getListRolesClient() {
         return listRolesClient;
     }
 
     public void setListRolesClient(List<ClientRole> listRolesClient) {
         this.listRolesClient = listRolesClient;
-    }/**/
+    }*/
 
     /*public List<String> getListAuthoritys() {
         return listAuthoritys;
